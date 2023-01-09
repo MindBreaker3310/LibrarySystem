@@ -1,0 +1,51 @@
+version: '3.4'
+
+services:
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalog
+    build:
+      context: .
+      dockerfile: Services/Catalog.API/Dockerfile
+
+  basket.api:
+    image: ${DOCKER_REGISTRY-}basket
+    build:
+      context: .
+      dockerfile: Services/Basket.API/Dockerfile
+
+  ordering.api:
+    image: ${DOCKER_REGISTRY-}ordering
+    build:
+      context: .
+      dockerfile: Services/Ordering.API/Dockerfile
+
+#  catalogdb:
+#    image: mcr.microsoft.com/mssql/server:2019-latest
+
+
+  catalogdb:
+    image: mongo
+
+  basketdb:
+    image: mongo
+
+  orderingdb:
+    image: mongo
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  mongoexpress:
+    image: mongo-express
+
+
+  ocelotgwapi:
+    image: ${DOCKER_REGISTRY-}ocelotgwapi
+    build:
+      context: .
+      dockerfile: ApiGateways/OcelotGwApi/Dockerfile
+
+volumes:
+  mongo_data:
+
+

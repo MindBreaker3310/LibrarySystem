@@ -1,0 +1,63 @@
+﻿{
+  "Routes": [
+    { //catalog API
+      "DownstreamPathTemplate": "/api/Catalog", //要連接到的api路由
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [ //要連到的server位置
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog", //外面連到閘道的路由
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ] //允許的方法
+      //"FileCacheOptions": { "TtlSeconds": 30 } //檔案快取選項:設定存活時間
+    },
+    { //catalog 查id API
+      "DownstreamPathTemplate": "/api/Catalog/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "librarysystem_catalog.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    { //購物車
+      "DownstreamPathTemplate": "/api/Basket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "librarysystem_basket.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Basket",
+      "UpstreamHttpMethod": [ "GET", "PUT" ]
+    },
+    { //Basket Checkout API
+      "DownstreamPathTemplate": "/api/Basket/Checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "librarysystem_basket.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Basket/Checkout",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": { //限制請求量3秒內只有第一筆會被接受
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "3s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8010"
+  }
+}

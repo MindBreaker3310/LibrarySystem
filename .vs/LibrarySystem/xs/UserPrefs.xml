@@ -1,0 +1,51 @@
+﻿<Properties StartupConfiguration="{D3493453-4114-445B-B0B8-1C00A389D7B3}|Default">
+  <MonoDevelop.Ide.ItemProperties.Services.Catalog.API PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.ItemProperties.Services.Basket.API PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="LibrarySystem" expanded="True">
+            <Node name="ApiGateways" expanded="True">
+              <Node name="OcelotGwApi" expanded="True" />
+            </Node>
+            <Node name="BuildingBlocks" expanded="True">
+              <Node name="EventBus.Messages" expanded="True">
+                <Node name="Common" expanded="True" />
+                <Node name="Event" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="Services" expanded="True">
+              <Node name="Basket.API" expanded="True" />
+              <Node name="Ordering.API" expanded="True">
+                <Node name="EventBusConsumer" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="docker-compose" expanded="True">
+              <Node name="docker-compose.yml" expanded="True">
+                <Node name="docker-compose.override.yml" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Services.Ordering.API PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.ApiGateways.OcelotGwApi PreferredExecutionTarget="/Applications/Brave Browser.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
+      <Items>
+        <StartupItem ItemId="{9722D60F-B2EB-4C9F-8AD7-0E020627A299}" ItemName="Basket.API" ConfigurationId="Default" />
+        <StartupItem ItemId="{50656A62-2E76-4853-B85B-67934323E77C}" ItemName="Catalog.API" ConfigurationId="Default" />
+        <StartupItem ItemId="{DD6D8F1C-6A5E-44F3-840A-D09562D2C93F}" ItemName="Ordering.API" ConfigurationId="Default" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
+</Properties>

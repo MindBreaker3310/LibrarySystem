@@ -1,0 +1,96 @@
+version: '3.4'
+
+services:
+#DB
+  catalogdb:
+    container_name: db_catalog
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/catalogdb
+
+  basketdb:
+    container_name: db_basket
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/basketdb
+
+  orderingdb:
+    container_name: db_ordering
+    restart: always
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_data:/data/orderingdb
+
+#GoodShit
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672" #DashBoard的port
+
+  mongoexpress:
+    container_name: mongo_express
+    restart: always
+    environment: 
+      - ME_CONFIG_MONGODB_URL=mongodb://orderingdb:27017
+    ports:
+      - "8081:8081"
+    links:
+      - catalogdb
+      - orderingdb
+
+#API
+
+  catalog.api:
+    container_name: librarysystem_catalog.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings__ConnectionString=mongodb://catalogdb:27017"
+    depends_on:
+      - catalogdb
+    ports:
+      - "8000:80"
+
+  basket.api:
+    container_name: librarysystem_basket.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings__ConnectionString=mongodb://basketdb:27017"
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - basketdb
+      - rabbitmq
+    ports:
+      - "8001:80"
+
+
+  ordering.api:
+    container_name: librarysystem_ordering.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings__ConnectionString=mongodb://orderingdb:27017"
+      - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - orderingdb
+      - rabbitmq
+    ports:
+      - "8002:80"
+
+
+
+  ocelotgwapi:
+    container_name: librarysystem_ocelotgw.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Local
+    depends_on:
+      - catalog.api
+      - basket.api
+    ports:
+      - "8010:80"
